@@ -10,4 +10,7 @@ vm-install-archetype
     bash create_vm_via_packer.sh
 
 # import to virtualbox, boot and connect
-    bash import_boot_connect.sh
+    source ./settings.sh
+    vm-import
+    vm-boot
+    vm-connect
