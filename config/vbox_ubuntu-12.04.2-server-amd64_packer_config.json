@@ -63,7 +63,7 @@
 	},
         {
 		"type": "shell",
-		"script": "guest-script/provision.sh",
+		"script": "guest-script/provision-dependencies.sh",
 		"execute_command": "echo {{user `userpass`}} | {{ .Vars }} sudo -E -S sh '{{ .Path }}'"
 	},
         {
