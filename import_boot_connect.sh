@@ -28,25 +28,6 @@ if [[ ! -f $rsa_key_filename ]]; then
 fi
 
 
-# must be NAT on VM creation
-# must specify not to change nat mac; else mac changes, eth0 doesn't come up and can't get back in via ssh
-VBoxManage import $ovf_full_path --options keepnatmacs
-
-
-# start VM; remove '--type headless' to use gui
-VBoxManage startvm "${project_name}" --type headless
-
-
-# connect
-ssh-keygen -f ~/.ssh/known_hosts -R [localhost]:$port_number
-ssh -i $rsa_key_filename -p $port_number -o StrictHostKeyChecking=no $username@localhost
-
-
-# see VM info
-# VBoxManage showvminfo "${vmname}"
-
-# to power off
-# VBoxManage controlvm "${vmname}" poweroff
-
-# to remove (must be powered off)
-# VBoxManage unregistervm "${vmname}" --delete
+vm-import
+vm-boot
+vm-connect
