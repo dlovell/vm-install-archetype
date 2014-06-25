@@ -6,13 +6,6 @@ echo "Starting Packer build of VM"
 echo `date`
 
 
-# packer presumes paths in config are relative to working directory
-# so cd to config filename location
-config_abs_path=$(readlink -f "$packer_config_filename")
-config_abs_dir=$(dirname $config_abs_path)
-cd $config_abs_dir
-
-
 # creates $keyfile and $keyfile.pub
 rm $rsa_key_filename
 ssh-keygen -t rsa -P "" -f $rsa_key_filename

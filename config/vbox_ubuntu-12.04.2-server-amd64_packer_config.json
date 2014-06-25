@@ -15,7 +15,7 @@
 		"output_directory": "{{user `project_name`}}",
 		"http_port_min" : 9001,
 		"http_port_max" : 9001,
-		"http_directory": "./",
+		"http_directory": "./config/",
 		"vboxmanage": [
 			["modifyvm", "{{.Name}}", "--natpf1", "guestssh,tcp,,{{user `guestssh_port`}},,22"],
 			["modifyvm", "{{.Name}}", "--memory", "2048"],
@@ -57,18 +57,18 @@
         },
 	{
 		"type": "shell",
-		"script": "set_up_ssh_key.sh",
+		"script": "guest-script/set_up_ssh_key.sh",
 		"execute_command": "chmod +x {{ .Path }}; {{ .Vars }} {{ .Path }} /home/{{user `userpass`}}/{{user `keyfile_pub`}}"
 
 	},
         {
 		"type": "shell",
-		"script": "provision.sh",
+		"script": "guest-script/provision.sh",
 		"execute_command": "echo {{user `userpass`}} | {{ .Vars }} sudo -E -S sh '{{ .Path }}'"
 	},
         {
 		"type": "shell",
-		"script": "disk_cleanup.sh",
+		"script": "guest-script/disk_cleanup.sh",
 		"execute_command": "echo {{user `userpass`}} | {{ .Vars }} sudo -E -S sh '{{ .Path }}' {{user `userpass`}}"
         }
 	]
