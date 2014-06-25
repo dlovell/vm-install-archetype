@@ -5,7 +5,7 @@
 		"guestssh_port": "2222",
 		"project_name": "vm-install-archetype-virtualbox",
 		"keyfile_pub": "vm_guest_id_rsa.pub",
-		"preseed_url": "http://rawgithub.com/mit-probabilistic-computing-project/vm-install-archetype/master/ubuntu-12.04.2-server-preseed.cfg"
+		"preseed_filename": "ubuntu_12.04.2_server_preseed.cfg"
 	},
 
 	"builders": [
@@ -13,6 +13,9 @@
 		"type": "virtualbox",
 		"vm_name": "{{user `project_name`}}",
 		"output_directory": "{{user `project_name`}}",
+		"http_port_min" : 9001,
+		"http_port_max" : 9001,
+		"http_directory": "./",
 		"vboxmanage": [
 			["modifyvm", "{{.Name}}", "--natpf1", "guestssh,tcp,,{{user `guestssh_port`}},,22"],
 			["modifyvm", "{{.Name}}", "--memory", "2048"],
@@ -26,11 +29,11 @@
 		"ssh_password": "{{user `userpass`}}",
 		"shutdown_command": "echo {{user `userpass`}} | sudo -S shutdown -P now",
 		"disk_size": 16000,
-		"headless": true,
+		"headless": false,
 		"boot_command": [
 			"<esc><esc><enter><wait>",
 		"/install/vmlinuz noapic ",
-		"preseed/url={{user `preseed_url`}} ",
+		"preseed/url={{ .HTTPIP }}:{{ .HTTPPort }}/{{user `preseed_filename`}} ",
 	       	"debian-installer=en_US auto locale=en_US kbd-chooser/method=us ",
 	       	"hostname={{ .Name }} ",
 	       	"fb=false debconf/frontend=noninteractive ",
