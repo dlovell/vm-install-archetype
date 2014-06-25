@@ -46,3 +46,11 @@ function abort_on_error {
 		exit 1
 	fi
 }
+
+function require_file_exists {
+	if [ ! -f $1 ]; then
+		echo File doesn't exist: $1
+		echo $2
+		exit 1
+	fi
+}
