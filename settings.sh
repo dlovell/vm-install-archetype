@@ -1,6 +1,7 @@
 project_name=vm-install-archetype-virtualbox
 osname=ubuntu-12.04.2-server
-preseed_filename=${osname}-preseed.cfg
+# preseed filename can't have dashes, '-', to be served up b packer
+preseed_filename=${osname//-/_}_preseed.cfg
 project_dir=$project_name
 ovf_full_path="${project_dir}"/"${project_name}".ovf
 port_number=2222
