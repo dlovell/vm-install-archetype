@@ -13,18 +13,11 @@ ssh-keygen -t rsa -P "" -f $rsa_key_filename
 
 # validate
 packer validate $packer_config_filename
-if [[ $? -ne 0 ]]; then
-	echo "Failed to validate $packer_config_filename"
-	exit 1
-fi
-
+abort_on_error "Failed to validate $packer_config_filename"
 
 # build
 export PACKER_LOG=1 && packer build $packer_config_filename >out 2>err
-if [[ $? -ne 0 ]]; then
-	echo "Failed to build $packer_config_filename"
-	exit 1
-fi
+abort_on_error "Failed to build $packer_config_filename"
 
 
 echo "Done Packer build of VM"

@@ -39,3 +39,10 @@ function vm-unregister-delete {
 	# vm must be powered off
 	vboxmanage unregistervm "${project_name}" --delete
 }
+
+function abort_on_error {
+	if [[ $? -ne "0" ]]; then
+		echo FAILED: $1
+		exit 1
+	fi
+}
