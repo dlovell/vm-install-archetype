@@ -15,7 +15,7 @@ Provisioning dependencies can be a time/network intensive process but fairly sta
 The packer build process is used to provision project dependencies and upload the scripts to provision the project itself and test the project.  Project provisioning and testing uses only VM facilities.
 
 # create a VM
-    make full-vm
+    make tested-vm
 
 # import to virtualbox, boot and connect
     source ./settings.sh
