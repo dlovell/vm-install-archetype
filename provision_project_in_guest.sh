@@ -3,7 +3,7 @@ source settings.sh
 
 
 function provision_project {
-	vm-connect "echo $pass | sudo -S bash provision_project.sh"
+	vm-connect "echo $username | sudo -S bash provision_project.sh"
 }
 
 function import_boot {
