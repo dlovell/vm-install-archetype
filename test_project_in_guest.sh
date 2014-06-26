@@ -3,7 +3,7 @@ source settings.sh
 
 
 function test_project {
-	vm-connect bash test_project.sh
+	vm-connect "bash test_project.sh"
 }
 
 function import_boot {
