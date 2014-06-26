@@ -52,6 +52,11 @@
         },
 	{
                 "type": "file",
+                "source": "guest-script/provision_project.sh",
+                "destination": "/home/{{user `userpass`}}/provision_project.sh"
+        },
+	{
+                "type": "file",
                 "source": "{{user `keyfile_pub`}}",
                 "destination": "/home/{{user `userpass`}}/{{user `keyfile_pub`}}"
         },
@@ -63,7 +68,7 @@
 	},
         {
 		"type": "shell",
-		"script": "guest-script/provision-dependencies.sh",
+		"script": "guest-script/provision_dependencies.sh",
 		"execute_command": "echo {{user `userpass`}} | {{ .Vars }} sudo -E -S sh '{{ .Path }}'"
 	},
         {
