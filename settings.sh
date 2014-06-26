@@ -24,7 +24,7 @@ function vm-boot {
 
 function vm-connect {
 	ssh-keygen -f ~/.ssh/known_hosts -R [localhost]:$port_number
-	ssh -i $rsa_key_filename -p $port_number -o StrictHostKeyChecking=no $username@localhost
+	ssh -i $rsa_key_filename -p $port_number -o StrictHostKeyChecking=no $username@localhost $1
 }
 
 function vm-showinfo {
@@ -33,6 +33,10 @@ function vm-showinfo {
 
 function vm-poweroff {
 	vboxmanage controlvm "${project_name}" poweroff
+}
+
+function vm-export {
+	vboxmanage export "${project_name}" --output $1
 }
 
 function vm-unregister-delete {
@@ -48,8 +52,8 @@ function abort_on_error {
 }
 
 function require_file_exists {
-	if [ ! -f $1 ]; then
-		echo File doesn't exist: $1
+	if [ ! -f $1 ] ; then
+		echo "File doesn't exist: $1"
 		echo $2
 		exit 1
 	fi
