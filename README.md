@@ -3,7 +3,7 @@ vm-install-archetype
 
 # get it
     git clone https://github.com/mit-probabilistic-computing-project/vm-install-archetype
-    sudo bash vm-install-archetype/install.sh
+    sudo bash vm-install-archetype/install/install.sh
     source ~/.bashrc
 
 # create a VM
