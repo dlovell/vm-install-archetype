@@ -12,14 +12,14 @@ full-vm: $(PROVISIONED)
 
 tested-vm: $(TESTED)
 
-tgz: tested-vm
+tgz: $(TESTED)
 	time bash create_tgz.sh
 
-$(TESTED): full-vm
+$(TESTED): $(PROVISIONED)
 	time bash test_project_in_guest.sh
 	touch $(TESTED)
 
-$(PROVISIONED): base-vm
+$(PROVISIONED): $(OVF_FULL_PATH)
 	time bash provision_project_in_guest.sh
 	touch $(PROVISIONED)
 
