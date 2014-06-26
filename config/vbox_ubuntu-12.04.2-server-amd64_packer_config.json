@@ -57,6 +57,11 @@
         },
 	{
                 "type": "file",
+                "source": "guest-script/test_project.sh",
+                "destination": "/home/{{user `userpass`}}/test_project.sh"
+        },
+	{
+                "type": "file",
                 "source": "{{user `keyfile_pub`}}",
                 "destination": "/home/{{user `userpass`}}/{{user `keyfile_pub`}}"
         },
