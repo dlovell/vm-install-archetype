@@ -1,6 +1,7 @@
 OVF_FULL_PATH := $(shell bash -c 'source settings.sh && echo $$ovf_full_path')
 PROJECT_DIR := $(shell bash -c 'source settings.sh && echo $$project_dir')
 PROVISIONED := $(PROJECT_DIR)/provisioned
+TESTED := $(PROJECT_DIR)/tested
 
 
 all: tgz
@@ -9,8 +10,14 @@ base-vm: $(OVF_FULL_PATH)
 
 full-vm: $(PROVISIONED)
 
-tgz: full-vm
+tested-vm: $(TESTED)
+
+tgz: tested-vm
 	time bash create_tgz.sh
+
+$(TESTED): full-vm
+	time bash test_project_in_guest.sh
+	touch $(TESTED)
 
 $(PROVISIONED): base-vm
 	time bash provision_project_in_guest.sh
