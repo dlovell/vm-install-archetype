@@ -15,6 +15,8 @@ function vm-import {
 	# must specify not to change nat mac;
 	#   else mac changes, eth0 doesn't come up and can't get back in via ssh
 	vboxmanage import $ovf_full_path --options keepnatmacs
+	# forget ssh key in case there's a conflicting one
+	ssh-keygen -f ~/.ssh/known_hosts -R [localhost]:$port_number
 }
 
 function vm-boot {
@@ -23,7 +25,6 @@ function vm-boot {
 }
 
 function vm-connect {
-	ssh-keygen -f ~/.ssh/known_hosts -R [localhost]:$port_number
 	ssh -i $rsa_key_filename -p $port_number -o StrictHostKeyChecking=no $username@localhost $1
 }
 
