@@ -7,7 +7,7 @@ vm-install-archetype
     source ~/.bashrc
 
 # create a VM
-    bash create_vm_via_packer.sh
+    make full-vm
 
 # import to virtualbox, boot and connect
     source ./settings.sh
