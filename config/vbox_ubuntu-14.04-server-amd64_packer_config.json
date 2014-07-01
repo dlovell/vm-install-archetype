@@ -6,6 +6,8 @@
 		"project_name": "vm-install-archetype-virtualbox",
 		"keyfile_pub": "vm_guest_id_rsa.pub",
 		"preseed_filename": "ubuntu_14.04_server_preseed.cfg"
+		"guest_script_dir": "guest-script"
+		"config_dir": "config"
 	},
 
 	"builders": [
@@ -15,7 +17,7 @@
 		"output_directory": "{{user `project_name`}}",
 		"http_port_min" : 9001,
 		"http_port_max" : 9001,
-		"http_directory": "./config/",
+		"http_directory": "./{{user `config_dir`}}/",
 		"vboxmanage": [
 			["modifyvm", "{{.Name}}", "--natpf1", "guestssh,tcp,,{{user `guestssh_port`}},,22"],
 			["modifyvm", "{{.Name}}", "--memory", "2048"],
@@ -52,12 +54,12 @@
         },
 	{
                 "type": "file",
-                "source": "guest-script/provision_project.sh",
+                "source": "{{user `guest_script_dir`}}/provision_project.sh",
                 "destination": "/home/{{user `userpass`}}/provision_project.sh"
         },
 	{
                 "type": "file",
-                "source": "guest-script/test_project.sh",
+                "source": "{{user `guest_script_dir`}}/test_project.sh",
                 "destination": "/home/{{user `userpass`}}/test_project.sh"
         },
 	{
@@ -67,18 +69,18 @@
         },
 	{
 		"type": "shell",
-		"script": "guest-script/set_up_ssh_key.sh",
+		"script": "{{user `guest_script_dir`}}/set_up_ssh_key.sh",
 		"execute_command": "chmod +x {{ .Path }}; {{ .Vars }} {{ .Path }} /home/{{user `userpass`}}/{{user `keyfile_pub`}}"
 
 	},
         {
 		"type": "shell",
-		"script": "guest-script/provision_dependencies.sh",
+		"script": "{{user `guest_script_dir`}}/provision_dependencies.sh",
 		"execute_command": "echo {{user `userpass`}} | {{ .Vars }} sudo -E -S sh '{{ .Path }}'"
 	},
         {
 		"type": "shell",
-		"script": "guest-script/disk_cleanup.sh",
+		"script": "{{user `guest_script_dir`}}/disk_cleanup.sh",
 		"execute_command": "echo {{user `userpass`}} | {{ .Vars }} sudo -E -S sh '{{ .Path }}' {{user `userpass`}}"
         }
 	]
