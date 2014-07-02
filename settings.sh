@@ -2,6 +2,7 @@ username=bayesdb
 port_number=2222
 project_name=vm-install-archetype-virtualbox
 rsa_key_filename=vm_guest_id_rsa
+guest_script_dir=archetype-guest-script
 #
 # osname=ubuntu-12.04.2-server
 osname=ubuntu-14.04-server-amd64
