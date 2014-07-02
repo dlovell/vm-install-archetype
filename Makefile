@@ -1,14 +1,14 @@
 SETTINGS_DIR := .
 SETTINGS_FILENAME := $(SETTINGS_DIR)/settings.sh
 #
-OVF_FULL_PATH := $(shell bash -c 'source $(SETTINGS_FILENAME) && echo $$ovf_full_path')
-PROJECT_DIR := $(shell bash -c 'source $(SETTINGS_FILENAME) && echo $$project_dir')
-USERNAME := $(shell bash -c 'source $(SETTINGS_FILENAME) && echo $$username')
-PRESEED_TEMPLATE := $(shell bash -c 'source $(SETTINGS_FILENAME) && echo $$preseed_template')
-TGZ := $(shell bash -c 'source $(SETTINGS_FILENAME) && echo $$tgz_filename')
+OVF_FULL_PATH := $(shell bash -c 'set -u && source $(SETTINGS_FILENAME) && echo $$ovf_full_path')
+OUTPUT_DIR := $(shell bash -c 'set -u && source $(SETTINGS_FILENAME) && echo $$output_dir')
+USERNAME := $(shell bash -c 'set -u && source $(SETTINGS_FILENAME) && echo $$username')
+PRESEED_TEMPLATE := $(shell bash -c 'set -u && source $(SETTINGS_FILENAME) && echo $$preseed_template')
+TGZ := $(shell bash -c 'set -u && source $(SETTINGS_FILENAME) && echo $$tgz_filename')
 #
-PROVISIONED := $(PROJECT_DIR)/provisioned
-TESTED := $(PROJECT_DIR)/tested
+PROVISIONED := $(OUTPUT_DIR)/provisioned
+TESTED := $(OUTPUT_DIR)/tested
 
 
 all: tgz
