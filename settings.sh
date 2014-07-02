@@ -8,7 +8,7 @@ guest_script_dir=archetype-guest-script
 osname=ubuntu-14.04-server-amd64
 packer_config_filename=config/vbox_${osname}_packer_config.json
 # preseed filename can't have dashes, '-', to be served up by packer
-preseed_template=${osname//-/_}_preseed.cfg
-project_dir=$project_name
-ovf_full_path="${project_dir}"/"${project_name}".ovf
-#
+preseed_template=config/${osname//-/_}_preseed.cfg
+output_dir=$project_name
+ovf_full_path="${output_dir}"/"${project_name}".ovf
+tgz_filename=${project_name}_$(date +%Y%m%d).tgz

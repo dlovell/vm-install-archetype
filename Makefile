@@ -5,6 +5,7 @@ OVF_FULL_PATH := $(shell bash -c 'source $(SETTINGS_FILENAME) && echo $$ovf_full
 PROJECT_DIR := $(shell bash -c 'source $(SETTINGS_FILENAME) && echo $$project_dir')
 USERNAME := $(shell bash -c 'source $(SETTINGS_FILENAME) && echo $$username')
 PRESEED_TEMPLATE := $(shell bash -c 'source $(SETTINGS_FILENAME) && echo $$preseed_template')
+TGZ := $(shell bash -c 'source $(SETTINGS_FILENAME) && echo $$tgz_filename')
 #
 PROVISIONED := $(PROJECT_DIR)/provisioned
 TESTED := $(PROJECT_DIR)/tested
@@ -18,7 +19,9 @@ full-vm: $(PROVISIONED)
 
 tested-vm: $(TESTED)
 
-tgz: $(TESTED)
+tgz: $(TGZ)
+
+$(TGZ): $(TESTED)
 	time bash create_tgz.sh $(SETTINGS_FILENAME)
 
 $(TESTED): $(PROVISIONED)
