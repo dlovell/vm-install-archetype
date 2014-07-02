@@ -33,5 +33,5 @@ $(PROVISIONED): $(OVF_FULL_PATH)
 	touch $(PROVISIONED)
 
 $(OVF_FULL_PATH):
-	perl -pe 's/USERPASS/$(USERNAME)/g' config/$(PRESEED_TEMPLATE) > config/preseed.cfg
+	perl -pe 's/USERPASS/$(USERNAME)/g' $(PRESEED_TEMPLATE) > config/preseed.cfg
 	time bash create_base_vm_via_packer.sh $(SETTINGS_FILENAME)
