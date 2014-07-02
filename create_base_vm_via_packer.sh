@@ -10,6 +10,7 @@ options=$(
 	-var "guestssh_port=$port_number" \
 	-var "project_name=$project_name" \
 	-var "keyfile_pub=${rsa_key_filename}.pub" \
+	-var "guest_script_dir=${guest_script_dir}" \
 	)
 
 function make_rsa_keyfile {
