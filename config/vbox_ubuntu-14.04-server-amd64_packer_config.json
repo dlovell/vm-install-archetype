@@ -1,11 +1,11 @@
 {
 
 	"variables": {
-		"userpass": "bigdata",
-		"guestssh_port": "2222",
-		"project_name": "vm-install-archetype-virtualbox",
-		"keyfile_pub": "vm_guest_id_rsa.pub",
-		"preseed_filename": "ubuntu_14.04_server_preseed.cfg"
+		"userpass": null,
+		"guestssh_port": null,
+		"project_name": null,
+		"keyfile_pub": null,
+		"preseed_filename": "preseed.cfg"
 	},
 
 	"builders": [

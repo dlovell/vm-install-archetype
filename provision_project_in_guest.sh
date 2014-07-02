@@ -1,5 +1,7 @@
 set -e
-source settings.sh
+set -u
+source $1
+source helpers.sh
 
 
 function provision_project {
@@ -21,6 +23,9 @@ function poweroff_export_unregister_delete {
 }
 
 
+task="provisioning of project in guest"
+echo `date`: Starting $task
 import_boot
 provision_project
 poweroff_export_unregister_delete
+echo `date`: Done $task
