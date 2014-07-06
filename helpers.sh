@@ -19,7 +19,9 @@ function vm-boot {
 }
 
 function vm-connect {
+	set +u
 	ssh -i $rsa_key_filename -p $port_number -o StrictHostKeyChecking=no $username@localhost $1
+	set -u
 }
 
 function vm-showinfo {
