@@ -17,7 +17,7 @@ function install_packer {
 		cd $packer_install_dir
 		unzip ../$which_packer_zip
 		cat -- >> ~/.bashrc <<EOF
-		export PATH=\$PATH:$packer_install_dir
+export PATH=\$PATH:$packer_install_dir
 EOF
 	fi
 }
