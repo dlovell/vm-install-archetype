@@ -15,6 +15,7 @@ function provision_project {
 
 function vm-shutdown {
 	vm-connect "echo $username | sudo -S shutdown -h now"
+	sleep 4
 }
 
 function shutdown_export_unregister_delete {
