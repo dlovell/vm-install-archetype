@@ -1,5 +1,4 @@
-set -u
-set -e
+set -eu
 
 
-nosetests -w crosscat/crosscat/tests
+nosetests -w crosscat/crosscat/tests/unit_tests
