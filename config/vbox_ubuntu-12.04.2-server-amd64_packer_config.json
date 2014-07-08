@@ -1,11 +1,12 @@
 {
 
 	"variables": {
-		"userpass": "bigdata",
-		"guestssh_port": "2222",
-		"project_name": "vm-install-archetype-virtualbox",
-		"keyfile_pub": "vm_guest_id_rsa.pub",
-		"preseed_filename": "ubuntu_12.04.2_server_preseed.cfg"
+		"userpass": null,
+		"guestssh_port": null,
+		"project_name": null,
+		"keyfile_pub": null,
+		"guest_script_dir": null,
+		"preseed_filename": "preseed.cfg"
 	},
 
 	"builders": [
@@ -52,16 +53,6 @@
         },
 	{
                 "type": "file",
-                "source": "guest-script/provision_project.sh",
-                "destination": "/home/{{user `userpass`}}/provision_project.sh"
-        },
-	{
-                "type": "file",
-                "source": "guest-script/test_project.sh",
-                "destination": "/home/{{user `userpass`}}/test_project.sh"
-        },
-	{
-                "type": "file",
                 "source": "{{user `keyfile_pub`}}",
                 "destination": "/home/{{user `userpass`}}/{{user `keyfile_pub`}}"
         },
@@ -71,9 +62,19 @@
 		"execute_command": "chmod +x {{ .Path }}; {{ .Vars }} {{ .Path }} /home/{{user `userpass`}}/{{user `keyfile_pub`}}"
 
 	},
+	{
+                "type": "file",
+                "source": "{{user `guest_script_dir`}}/provision_project.sh",
+                "destination": "/home/{{user `userpass`}}/provision_project.sh"
+        },
+	{
+                "type": "file",
+                "source": "{{user `guest_script_dir`}}/test_project.sh",
+                "destination": "/home/{{user `userpass`}}/test_project.sh"
+        },
         {
 		"type": "shell",
-		"script": "guest-script/provision_dependencies.sh",
+		"script": "{{user `guest_script_dir`}}/provision_dependencies.sh",
 		"execute_command": "echo {{user `userpass`}} | {{ .Vars }} sudo -E -S sh '{{ .Path }}'"
 	},
         {
