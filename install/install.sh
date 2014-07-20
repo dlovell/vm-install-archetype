@@ -6,6 +6,12 @@ function install_virtualbox {
 	sudo apt-get install -y virtualbox qemu-utils
 }
 
+function ensure_wget {
+	if [[ -z $(which wget) ]]; then
+		sudo apt-get install wget
+	fi
+}
+
 function install_packer {
 	# install packer on ubuntu
 	which_packer=$(which packer)
@@ -24,4 +30,5 @@ EOF
 
 
 install_virtualbox
+ensure_wget
 install_packer
