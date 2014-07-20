@@ -1,4 +1,4 @@
-username=bayesdb
+username=bigdata
 port_number=2222
 project_name=vm-install-archetype-virtualbox
 rsa_key_filename=vm_guest_id_rsa
