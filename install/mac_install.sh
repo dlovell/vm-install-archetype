@@ -5,7 +5,7 @@ virtualbox_dmg_filename=VirtualBox-4.3.0-89960-OSX.dmg
 virtualbox_base_url=http://download.virtualbox.org/virtualbox/4.3.0/
 #
 packer_base_url=http://dl.bintray.com/mitchellh/packer/
-which_packer_zip=0.6.1_darwin_amd64.zip
+which_packer_zip=0.3.7_darwin_amd64.zip
 packer_install_dir=~/packer
 
 
